@@ -18,6 +18,14 @@ export class AuthService {
   async singUp(signUpDto: SignUpDto): Promise<{ token: string }> {
     const { name, email, password } = signUpDto;
 
+    const existUser = await this.userModel.findOne({ email });
+
+    if (existUser) {
+      throw new UnauthorizedException(
+        'There is already a user with this email',
+      );
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await this.userModel.create({
