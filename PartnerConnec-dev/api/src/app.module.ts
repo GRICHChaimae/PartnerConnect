@@ -9,7 +9,7 @@ import { PAuthModule } from './admin/parrain-marraine/p-auth/p-auth.module';
     AuthModule,
     PAuthModule,
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost/PartnerConnect'),
+    MongooseModule.forRoot('mongodb://127.0.0.1/PartnerConnect'),
     PAuthModule,
   ],
   controllers: [],
