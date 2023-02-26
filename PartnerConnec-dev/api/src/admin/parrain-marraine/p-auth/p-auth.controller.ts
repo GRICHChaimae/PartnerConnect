@@ -1,13 +1,28 @@
-import { Controller, Get } from '@nestjs/common';
-import { UseGuards } from '@nestjs/common/decorators';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { Req, UseGuards } from '@nestjs/common/decorators';
 import { AuthGuard } from '@nestjs/passport';
+import { ParrainSignUpDto } from './dto/parrainsignup.dto';
+import { PAuthService } from './p-auth.service';
 
-@Controller('parrain')
-@Controller('p-auth')
+@Controller('api/v1/p-auth')
 export class PAuthController {
-  @Get('ded')
+  constructor(private pAuthService: PAuthService) {}
+
+  @Post('/signup')
   @UseGuards(AuthGuard())
-  test() {
-    return console.log('eeeee');
+  @UsePipes(new ValidationPipe())
+  parrainSignUp(
+    @Body()
+    parrainSignUpDto: ParrainSignUpDto,
+    @Req() req,
+  ) {
+    return this.pAuthService.parrainSingUp(parrainSignUpDto, req.user);
   }
 }

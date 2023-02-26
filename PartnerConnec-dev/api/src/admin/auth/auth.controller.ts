@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { SignUpDto } from './dto/signup.dto';
 
-@Controller('api/v1/admin/auth')
+@Controller('api/v1/admin')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
