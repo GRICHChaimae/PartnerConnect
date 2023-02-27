@@ -5,7 +5,6 @@ import { PAuthController } from './p-auth.controller';
 import { PAuthService } from './p-auth.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from 'src/admin/auth/schemas/user.schema';
 import { Parrain, ParrainSchema } from './schemas/parrain.schema';
 
 @Module({
