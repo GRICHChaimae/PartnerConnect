@@ -37,19 +37,20 @@ export class PAuthService {
       password: hashedPassword,
       admin: user._id,
     });
-    await this.sendEmail(email, name);
+    await this.sendEmail(email, name, password);
     return 'parrain account created succefuly';
   }
 
-  async sendEmail(email: string, name: string) {
+  async sendEmail(email: string, name: string, password: string) {
     try {
       await this.mailerService.sendMail({
         to: email,
         subject: 'Test Successful',
         html: ` 
-          <h1>Hello ${name}</h1>
-          <p>text description: execute two function sending one req modified</p>
-          <a href="https://www.youtube.com/watch?v=i6q3yO0Mb88">update your password to be able to use ur account</a>
+          <h5>Hello ${name}</h5>
+          <p>this is your password to join in your account as a godfather</p>
+          <p> <span style="color:red; font-weight: bold;">N.B.</span> please update your password</p>
+          <p>password: ${password}</p>
         `,
       });
       return 'Email sent successfully';
