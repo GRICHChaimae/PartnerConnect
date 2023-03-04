@@ -1,6 +1,5 @@
-import MuiAppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
