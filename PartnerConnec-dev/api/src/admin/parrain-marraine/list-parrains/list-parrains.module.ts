@@ -9,7 +9,6 @@ import { Parrain, ListParrainSchema } from './schemas/parrainlist.schema';
 @Module({
   imports: [
     AuthModule,
-    ConfigModule.forRoot(),
     MongooseModule.forFeature([{ name: Parrain.name, schema: ListParrainSchema }]),
   ],
   controllers: [ListParrainsController],
