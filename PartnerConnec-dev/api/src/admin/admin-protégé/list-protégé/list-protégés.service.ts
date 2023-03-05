@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { User } from 'src/admin/auth/schemas/user.schema';
-import { Protégé } from './schemas/protégélist.schema';
+import { Protégé } from '../schemas/protégé.schema';
 
 @Injectable()
 export class ListProtégésService {

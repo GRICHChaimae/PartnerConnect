@@ -1,11 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Protégé } from './schemas/protégé.schema';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { ProtégéSignUpDto } from './dto/protégésignup.dto';
 import { User } from 'src/admin/auth/schemas/user.schema';
+import { Protégé } from '../schemas/protégé.schema';
 
 
 @Injectable()

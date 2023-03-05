@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { User } from 'src/admin/auth/schemas/user.schema';
-import { Parrain } from './schemas/parrainlist.schema';
+import { Parrain } from '../schemas/parrain.schema';
 
 @Injectable()
 export class ListParrainsService {

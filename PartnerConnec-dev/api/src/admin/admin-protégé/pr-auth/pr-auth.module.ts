@@ -3,9 +3,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/admin/auth/auth.module';
+import { Protégé, ProtégéSchema } from '../schemas/protégé.schema';
 import { PrAuthController } from './pr-auth.controller';
 import { PrAuthService } from './pr-auth.service';
-import { Protégé, ProtégéSchema } from './schemas/protégé.schema';
 
 @Module({
   imports: [
