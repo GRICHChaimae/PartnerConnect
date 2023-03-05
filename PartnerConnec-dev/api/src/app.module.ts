@@ -7,6 +7,7 @@ import { PAuthModule } from './admin/parrain-marraine/p-auth/p-auth.module';
 import { ListParrainsModule } from './admin/parrain-marraine/list-parrains/list-parrains.module';
 import { ListProtégésModule } from './admin/admin-protégé/list-protégé/list-protégés.module';
 import { DeleteParrainModule } from './admin/parrain-marraine/delete-parrain/delete-parrain.module';
+import { ModuleMailerModule } from './modules/module-mailer.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { DeleteParrainModule } from './admin/parrain-marraine/delete-parrain/del
     ListParrainsModule,
     ListProtégésModule,
     DeleteParrainModule,
+    ModuleMailerModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://127.0.0.1/PartnerConnect'),
   ],
