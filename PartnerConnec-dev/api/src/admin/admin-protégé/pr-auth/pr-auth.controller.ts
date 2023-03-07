@@ -16,7 +16,7 @@ export class PrAuthController {
     protégéSignUpDto: ProtégéSignUpDto,
     @Req() req,
   ) {
-    return this.prAuthService.parrainSingUp(protégéSignUpDto, req.user);
+    return this.prAuthService.parrainSignUp(protégéSignUpDto, req.user);
   }
 
 }

@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/admin/auth/auth.module';
+import { Parrain, ParrainSchema } from 'src/schemas/parrain schemas/parrain.schema';
 import { Protégé, ProtégéSchema } from 'src/schemas/protégé schemas/protégé.schema';
 import { PrAuthController } from './pr-auth.controller';
 import { PrAuthService } from './pr-auth.service';
@@ -28,7 +29,7 @@ import { PrAuthService } from './pr-auth.service';
       }),
       inject: [ConfigService],
     }),
-    MongooseModule.forFeature([{ name: Protégé.name, schema: ProtégéSchema }]),
+    MongooseModule.forFeature([{ name: Protégé.name, schema: ProtégéSchema }, { name: Parrain.name, schema: ParrainSchema }]),
   ],
   controllers: [PrAuthController],
   providers: [PrAuthService],
