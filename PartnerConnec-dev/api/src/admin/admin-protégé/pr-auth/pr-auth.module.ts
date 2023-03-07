@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/admin/auth/auth.module';
+import { ModuleMailerModule } from 'src/modules/module-mailer.module';
 import { Parrain, ParrainSchema } from 'src/schemas/parrain schemas/parrain.schema';
 import { Protégé, ProtégéSchema } from 'src/schemas/protégé schemas/protégé.schema';
 import { PrAuthController } from './pr-auth.controller';
@@ -11,24 +12,7 @@ import { PrAuthService } from './pr-auth.service';
 @Module({
   imports: [
     AuthModule,
-    ConfigModule.forRoot(),
-    MailerModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        transport: {
-          host: configService.get('SMTP_HOST'),
-          port: configService.get('SMTP_PORT'),
-          auth: {
-            user: configService.get('SMTP_USER'),
-            pass: configService.get('SMTP_PASSWORD'),
-          },
-        },
-        defaults: {
-          from: configService.get('SMTP_FROM'),
-        },
-      }),
-      inject: [ConfigService],
-    }),
+    ModuleMailerModule,
     MongooseModule.forFeature([{ name: Protégé.name, schema: ProtégéSchema }, { name: Parrain.name, schema: ParrainSchema }]),
   ],
   controllers: [PrAuthController],
