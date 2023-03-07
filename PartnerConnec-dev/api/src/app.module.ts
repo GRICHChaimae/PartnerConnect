@@ -8,6 +8,7 @@ import { ListParrainsModule } from './admin/parrain-marraine/list-parrains/list-
 import { ListProtégésModule } from './admin/admin-protégé/list-protégé/list-protégés.module';
 import { DeleteParrainModule } from './admin/parrain-marraine/delete-parrain/delete-parrain.module';
 import { ModuleMailerModule } from './modules/module-mailer.module';
+import { DeleteMenteeModule } from './admin/admin-protégé/delete-mentee/delete-mentee.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ModuleMailerModule } from './modules/module-mailer.module';
     ListParrainsModule,
     ListProtégésModule,
     DeleteParrainModule,
+    DeleteMenteeModule,
     ModuleMailerModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://127.0.0.1/PartnerConnect'),
