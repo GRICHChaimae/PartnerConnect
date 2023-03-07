@@ -3,9 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { ParrainSignUpDto } from './dto/parrainsignup.dto';
-import { User } from 'src/admin/auth/schemas/user.schema';
 import { MailerService } from '@nestjs-modules/mailer';
-import { Parrain } from '../schemas/parrain.schema';
+import { Parrain } from 'src/schemas/parrain schemas/parrain.schema';
+import { User } from 'src/schemas/admin schemas/user.schema';
 
 @Injectable()
 export class PAuthService {

@@ -1,6 +1,6 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Protégé } from '../schemas/protégé.schema';
+import { Protégé } from 'src/schemas/protégé schemas/protégé.schema';
 import { ListProtégésService } from './list-protégés.service';
 
 @Controller('api/v1/list-proteges')

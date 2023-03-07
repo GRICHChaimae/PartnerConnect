@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/admin/auth/auth.module';
-import { Parrain, ParrainSchema } from '../schemas/parrain.schema';
+import { Parrain, ParrainSchema } from 'src/schemas/parrain schemas/parrain.schema';
 import { ListParrainsController } from './list-parrains.controller';
 import { ListParrainsService } from './list-parrains.service';
 

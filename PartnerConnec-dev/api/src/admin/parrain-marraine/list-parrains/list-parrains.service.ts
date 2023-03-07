@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { User } from 'src/admin/auth/schemas/user.schema';
-import { Parrain } from '../schemas/parrain.schema';
+import { User } from 'src/schemas/admin schemas/user.schema';
+import { Parrain } from 'src/schemas/parrain schemas/parrain.schema';
 
 @Injectable()
 export class ListParrainsService {

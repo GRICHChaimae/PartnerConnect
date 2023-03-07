@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
-import { Protégé } from 'src/admin/admin-protégé/schemas/protégé.schema';
-import { Parrain } from '../schemas/parrain.schema';
+import mongoose from 'mongoose';import { Parrain } from 'src/schemas/parrain schemas/parrain.schema';
+import { Protégé } from 'src/schemas/protégé schemas/protégé.schema';
+;
 
 @Injectable()
 export class DeleteParrainService {

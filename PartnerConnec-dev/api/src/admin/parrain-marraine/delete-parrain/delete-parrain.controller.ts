@@ -1,5 +1,5 @@
 import { Controller, Delete, Param } from '@nestjs/common';
-import { Parrain } from '../schemas/parrain.schema';
+import { Parrain } from 'src/schemas/parrain schemas/parrain.schema';
 import { DeleteParrainService } from './delete-parrain.service';
 
 @Controller('api/v1/delete-parrain')

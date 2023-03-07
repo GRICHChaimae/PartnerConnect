@@ -5,7 +5,7 @@ import {
   IsString,
   IsStrongPassword,
 } from 'class-validator';
-import { User } from 'src/admin/auth/schemas/user.schema';
+import { User } from 'src/schemas/admin schemas/user.schema';
 
 export class ParrainSignUpDto {
   @IsNotEmpty()

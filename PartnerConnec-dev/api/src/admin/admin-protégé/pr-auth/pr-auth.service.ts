@@ -4,8 +4,8 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { ProtégéSignUpDto } from './dto/protégésignup.dto';
-import { User } from 'src/admin/auth/schemas/user.schema';
-import { Protégé } from '../schemas/protégé.schema';
+import { Protégé } from 'src/schemas/protégé schemas/protégé.schema';
+import { User } from 'src/schemas/admin schemas/user.schema';
 
 
 @Injectable()

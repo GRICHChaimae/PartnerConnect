@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/admin/auth/auth.module';
-import { Protégé, ProtégéSchema } from '../schemas/protégé.schema';
+import { Protégé, ProtégéSchema } from 'src/schemas/protégé schemas/protégé.schema';
 import { ListProtégésController } from './list-protégés.controller';
 import { ListProtégésService } from './list-protégés.service';;
 

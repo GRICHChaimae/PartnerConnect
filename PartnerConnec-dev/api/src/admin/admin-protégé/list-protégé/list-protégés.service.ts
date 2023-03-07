@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
-import { User } from 'src/admin/auth/schemas/user.schema';
-import { Protégé } from '../schemas/protégé.schema';
+import { User } from 'src/schemas/admin schemas/user.schema';
+import { Protégé } from 'src/schemas/protégé schemas/protégé.schema';
 
 @Injectable()
 export class ListProtégésService {

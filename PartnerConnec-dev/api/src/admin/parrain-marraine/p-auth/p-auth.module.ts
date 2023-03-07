@@ -3,8 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/admin/auth/auth.module';
 import { PAuthController } from './p-auth.controller';
 import { PAuthService } from './p-auth.service';
-import { Parrain, ParrainSchema } from '../schemas/parrain.schema';
 import { ModuleMailerModule } from '../../../modules/module-mailer.module';
+import { Parrain, ParrainSchema } from 'src/schemas/parrain schemas/parrain.schema';
 
 @Module({
   imports: [

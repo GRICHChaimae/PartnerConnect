@@ -1,6 +1,6 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Parrain } from '../schemas/parrain.schema';
+import { Parrain } from 'src/schemas/parrain schemas/parrain.schema';
 import { ListParrainsService } from './list-parrains.service';
 
 @Controller('api/v1/list-parrains')
