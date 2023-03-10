@@ -20,7 +20,7 @@ export class AuthController {
     return this.authService.singUp(signeUpDto);
   }
 
-  @Get('/login')
+  @Post('/login')
   @UsePipes(new ValidationPipe())
   login(@Body() loginDto: LoginDto): Promise<{ token: string }> {
     return this.authService.login(loginDto);

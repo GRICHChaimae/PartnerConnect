@@ -1,23 +1,25 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import Topbar from './Topbar';
+import AccessibilityNewOutlinedIcon from '@mui/icons-material/AccessibilityNewOutlined';
+import EscalatorWarningOutlinedIcon from '@mui/icons-material/EscalatorWarningOutlined';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import InfoIcon from '@mui/icons-material/Info';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -68,41 +70,24 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function Sidebar() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawer = () => {
-    setOpen(!open);
-  };
+export default function Sidenav() {
+  // const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
 
   return (
-    <Box>
-        <Topbar />
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-        <IconButton
-            onClick={handleDrawer}
-            sx={{
-              ...(open && { display: 'none' }),
-              px: 2.5,
-            }}
-          >
-            <MenuOutlinedIcon />
-          </IconButton>
-          <IconButton onClick={handleDrawer}             
-            sx={{
-              ...(!open && { display: 'none' }),
-            }}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          <IconButton onClick={() => setOpen(!open)}>
+            {open === false ? <MenuOutlinedIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {[{name: 'Home', path: '/', icon: HomeIcon}, {name: 'Mentor', path: '/mentor', icon: EscalatorWarningOutlinedIcon}, {name: 'Mentee', path: '/mentee', icon: AccessibilityNewOutlinedIcon}].map((text) => (
+            <ListItem key={text.name} disablePadding sx={{ display: 'block' }} onClick={() => (navigate(text.path))}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -117,17 +102,17 @@ export default function Sidebar() {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <text.icon /> 
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {[{name: 'Profile', path: '/profile', icon: AccountCircleIcon}, {name: 'About', path: '/about', icon: InfoIcon}, {name: 'Logout', path: '/login', icon: LogoutOutlinedIcon}].map((text) => (
+            <ListItem key={text.name} disablePadding sx={{ display: 'block' }} onClick={() => (navigate(text.path))}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -142,16 +127,16 @@ export default function Sidebar() {
                     justifyContent: 'center',
                   }}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <text.icon /> 
                 </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary={text.name} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
-
-    </Box>
     </Box>
   );
 }
+
+ 

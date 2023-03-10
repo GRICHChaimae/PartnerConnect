@@ -1,6 +1,4 @@
-import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/admin/auth/auth.module';
 import { ModuleMailerModule } from 'src/modules/module-mailer.module';
