@@ -9,57 +9,13 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import axios from 'axios';
-// import Divider from '@mui/material/Divider';
+import Swal from 'sweetalert2'
 
-// const columns = [
-//   { id: 'name', label: 'Name', minWidth: 170 },
-//   { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
-//   {
-//     id: 'population',
-//     label: 'Population',
-//     minWidth: 170,
-//     align: 'right',
-//     format: (value) => value.toLocaleString('en-US'),
-//   },
-//   {
-//     id: 'size',
-//     label: 'Size\u00a0(km\u00b2)',
-//     minWidth: 170,
-//     align: 'right',
-//     format: (value) => value.toLocaleString('en-US'),
-//   },
-//   {
-//     id: 'density',
-//     label: 'Density',
-//     minWidth: 170,
-//     align: 'right',
-//     format: (value) => value.toFixed(2),
-//   },
-// ];
-
-// function createData(name, code, population, size) {
-//   const density = population / size;
-//   return { name, code, population, size, density };
-// }
-
-// const rows = [
-//   createData('India', 'IN', 1324171354, 3287263),
-//   createData('China', 'CN', 1403500365, 9596961),
-//   createData('Italy', 'IT', 60483973, 301340),
-//   createData('United States', 'US', 327167434, 9833520),
-//   createData('Canada', 'CA', 37602103, 9984670),
-//   createData('Australia', 'AU', 25475400, 7692024),
-//   createData('Germany', 'DE', 83019200, 357578),
-//   createData('Ireland', 'IE', 4857000, 70273),
-//   createData('Mexico', 'MX', 126577691, 1972550),
-//   createData('Japan', 'JP', 126317000, 377973),
-//   createData('France', 'FR', 67022000, 640679),
-//   createData('United Kingdom', 'GB', 67545757, 242495),
-//   createData('Russia', 'RU', 146793744, 17098246),
-//   createData('Nigeria', 'NG', 200962417, 923768),
-//   createData('Brazil', 'BR', 210147125, 8515767),
-// ];
+const columns = [ 'Name', 'Email', 'Delete', 'Update'];
 
 export default function MentorList() {
   const [page, setPage] = useState(0);
@@ -78,13 +34,13 @@ const config = {
 
   const getMentors = () => {
     axios.get('http://localhost:3000/api/v1/list-parrains', config)
-  .then(response => {
-    console.log(response.data);
-    setRows(response.data)
-  })
-  .catch(error => {
-    console.error(error);
-  });
+    .then(response => {
+      console.log(response.data);
+      setRows(response.data)
+    })
+    .catch(error => {
+      console.error(error);
+    });
     console.log(token)
   }
 
@@ -97,8 +53,40 @@ const config = {
     setPage(0);
   };
 
+  const deleteOneMentor= async (id) => {
+    axios.delete(`http://localhost:3000/api/v1/delete-parrain/${id}`, config)
+    .then(response => {
+      console.log(response.data);
+      if (response.data) {
+        Swal.fire('Message!', response.data)
+      } else {
+        Swal.fire('Deletedl!', "The Mentor is deleted successfully", "success")
+        getMentors()
+      }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+  }
+
+  const deleteMentor = (id) => {
+    Swal.fire({
+      title: "Are you sure ?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.value) {
+        deleteOneMentor(id)
+      }
+    })
+  }
+
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <Paper sx={{ width: '100%', overflow: 'hidden', backgroundColor: 'aliceblue'}}>
       <Typography 
         gutterBottom
         variant='h5'
@@ -111,21 +99,15 @@ const config = {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {/* {columns.map((column) => (
+              {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  {column.label}
+                  {column}
                 </TableCell>
-              ))} */}
-                <TableCell
-                  align="left"
-                  style={{ minWidth: "100px" }}
-                >
-                  Name
-                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -152,10 +134,22 @@ const config = {
               .map((row) => {
                 return (
                     <TableRow hover role="checkbox" tabIndex={-1}>
-                        <TableCell key={row.id} align="left">
+                        <TableCell key={row._id} align="left">
                             {row.name}
                         </TableCell>
-
+                        <TableCell key={row._id} align="left">
+                            {row.email}
+                        </TableCell>
+                        <TableCell key={row._id} align="left">
+                          <IconButton onClick={() => deleteMentor(row._id)}>
+                            <PersonRemoveIcon />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell key={row._id} align="left">
+                          <IconButton onClick={() => console.log("update")}>
+                            <ManageAccountsIcon />
+                          </IconButton>
+                        </TableCell>
                     </TableRow>
                 )
               })

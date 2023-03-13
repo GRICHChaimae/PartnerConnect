@@ -16,7 +16,7 @@ export class DeleteParrainService {
     async deleteParrainById(id: string): Promise<Parrain | string> {
         const protégés = await this.protégéModel.find({ mentor: id });
         console.log(protégés.length)
-        if (protégés.length == 0) return await this.parrainModel.findByIdAndDelete(id);
+        if (protégés.length == 0) await this.parrainModel.findByIdAndDelete(id);
         else return "you can not delete this mentor, because he has the mentees";
     }
 }

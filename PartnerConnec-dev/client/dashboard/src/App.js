@@ -27,7 +27,7 @@ function SidenavRoutes() {
   }
   
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex',}}>
       <Sidenav />
       <Routes>
         <Route element={<PrivateRoute />} >
@@ -41,14 +41,6 @@ function SidenavRoutes() {
     </Box>
   );
 }
-
-
-<Routes>
-  <Route element={<PrivateRoute />} >
-    <Route path="/" element={<Home />}/>
-  </Route>
-  <Route path="/login" element={<Login />} />
-</Routes>
 
 
 function App() {
