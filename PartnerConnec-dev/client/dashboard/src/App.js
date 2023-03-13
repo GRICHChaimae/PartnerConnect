@@ -1,8 +1,8 @@
 import {Routes, Route, BrowserRouter} from "react-router-dom"
 import Box from '@mui/material/Box';
 import Sidenav from "./global/Sidenav";
-import PrivateRoute from "./components/ProtectedRoutes/PrivateRoute";
-import AuthGuard from "./components/ProtectedRoutes/AuthGuard";
+import PrivateRoute from "./ProtectedRoutes/PrivateRoute";
+import AuthGuard from "./ProtectedRoutes/AuthGuard";
 import Home from "./pages/dashboard/Home";
 import Mentor from "./pages/dashboard/Mentor";
 import Mentee from "./pages/dashboard/Mentee";
