@@ -112,7 +112,13 @@ export default function Sidenav() {
         <Divider />
         <List>
           {[{name: 'Profile', path: '/profile', icon: AccountCircleIcon}, {name: 'About', path: '/about', icon: InfoIcon}, {name: 'Logout', path: '/login', icon: LogoutOutlinedIcon}].map((text) => (
-            <ListItem key={text.name} disablePadding sx={{ display: 'block' }} onClick={() => (navigate(text.path))}>
+            <ListItem key={text.name} disablePadding sx={{ display: 'block' }} onClick={() => {
+              if (text.name === 'Logout') {
+                navigate(text.path);
+                localStorage.removeItem('token');
+              }
+              navigate(text.path);
+            }}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
