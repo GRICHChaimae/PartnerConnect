@@ -12,8 +12,13 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import Divider from '@mui/material/Divider';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import { Box, Stack } from '@mui/system';
+import Autocomplete from '@mui/material/Autocomplete';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import { Button, TextField } from '@mui/material';
 
 const columns = [ 'Name', 'Email', 'Delete', 'Update'];
 
@@ -43,6 +48,9 @@ const config = {
     });
     console.log(token)
   }
+
+  const [searchText, setSearchText] = useState('');
+  const filterRows = rows.filter(row => row.name.includes(searchText));
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -95,6 +103,30 @@ const config = {
       >
         Mentors List
       </Typography>
+      <Divider />
+      <Box height={10} />
+        <Stack direction="row" spacing={2} className="my-2 mb-2">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={rows}
+            sx={{ width: 300 }}
+            onChange={(e, v) => setSearchText(v.name)}
+            getOptionLabel={(row) => row.name ? row.name : ""}
+            renderInput={(params) => (
+              <TextField {...params} size="small" label="Search Products"/>
+            )}
+          />
+          <Typography
+            variant='h6'
+            component="div"
+            sx={{ flexGrow: 1 }}
+          ></Typography>
+          <Button variant="contained" endIcon={<PersonAddAlt1Icon />}>
+            Add
+          </Button>
+        </Stack>
+      <Box height={10} />
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -111,25 +143,7 @@ const config = {
             </TableRow>
           </TableHead>
           <TableBody>
-            {/* {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })} */}
-              {rows 
+              {filterRows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -146,9 +160,9 @@ const config = {
                           </IconButton>
                         </TableCell>
                         <TableCell key={row._id} align="left">
-                          <IconButton onClick={() => console.log("update")}>
-                            <ManageAccountsIcon />
-                          </IconButton>
+                        <IconButton onClick={() => console.log("update")}>
+                          <ManageAccountsIcon />
+                        </IconButton>
                         </TableCell>
                     </TableRow>
                 )
