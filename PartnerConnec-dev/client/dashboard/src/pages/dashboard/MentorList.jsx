@@ -6,12 +6,11 @@ import Divider from '@mui/material/Divider';
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import { Box, Stack } from '@mui/system';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import { Button } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import AddForm from '../../components/AddForm';
 import TableContainerC from '../../components/TableContainer';
 import AutocompleteComponent from '../../components/AutocompleteComponent';
+import AddButton from '../../components/AddButton';
 
 const style = {
   position: 'absolute',
@@ -98,9 +97,10 @@ const config = {
             component="div"
             sx={{ flexGrow: 1 }}
           ></Typography>
-          <Button variant="contained" endIcon={<PersonAddAlt1Icon />} onClick={handleOpen}>
+          {/* <Button variant="contained" endIcon={<PersonAddAlt1Icon />} onClick={handleOpen}>
             Add
-          </Button>
+          </Button> */}
+           <AddButton handleOpen={handleOpen} />
           <Modal
             open={open}
             aria-labelledby="modal-modal-title"
