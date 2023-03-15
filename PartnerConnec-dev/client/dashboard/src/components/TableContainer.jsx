@@ -10,8 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import IconButton from '@mui/material/IconButton';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import DeleteMentor from './DeleteModal';
 
-export default function TableContainerC({columns, filterRows, deleteMentor}) {
+export default function TableContainerC({columns, filterRows, deleteOneMentor}) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
@@ -50,7 +51,7 @@ export default function TableContainerC({columns, filterRows, deleteMentor}) {
                   {columns.map((column) => (
                     <TableCell key={row.id} align="left">
                         {column.id === 'delete' ? (
-                                <IconButton onClick={() => deleteMentor(row._id)}>
+                                <IconButton onClick={() => DeleteMentor(row._id, deleteOneMentor)}>
                                     <PersonRemoveIcon />
                                 </IconButton>
                             ) : column.id === 'update' ? (

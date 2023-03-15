@@ -79,22 +79,6 @@ const config = {
     });
   }
 
-  const deleteMentor = (id) => {
-    Swal.fire({
-      title: "Are you sure ?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.value) {
-        deleteOneMentor(id)
-      }
-    })
-  }
-
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden', backgroundColor: 'aliceblue'}}>
       <Typography 
@@ -118,17 +102,17 @@ const config = {
             Add
           </Button>
           <Modal
-        open={open}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
+            open={open}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
         <Box sx={style}>
           <AddForm closeEvent={handleClose} />
         </Box>
       </Modal>
         </Stack>
       <Box height={10} />
-        <TableContainerC columns={ columns } filterRows={filterRows} deleteMentor={deleteMentor}/>
+        <TableContainerC columns={ columns } filterRows={filterRows} deleteOneMentor={deleteOneMentor}/>
     </Paper>
   );
 }
