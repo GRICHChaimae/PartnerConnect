@@ -6,7 +6,7 @@ import { Strategy, ExtractJwt } from 'passport-jwt';
 import { Parrain } from 'src/schemas/parrain schemas/parrain.schema';
 
 @Injectable()
-export class MentorJwtStrategy extends PassportStrategy(Strategy) {
+export class MentorJwtStrategy extends PassportStrategy(Strategy, 'MentorJWT') {
   constructor(
     @InjectModel(Parrain.name)
     private parrainModel: Model<Parrain>,
@@ -20,7 +20,6 @@ export class MentorJwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload) {
     const { id } = payload;
 
-    console.log(id)
     const parrain = await this.parrainModel.findById(id);
 
     if (!parrain) {

@@ -18,6 +18,8 @@ export class MentorLoginService {
         const { email, password } = mentorLoginDto;
     
         const mentor = await this.parrainModel.findOne({ email });
+
+        console.log(mentor)
     
         if (!mentor) {
           throw new UnauthorizedException('Invalid email or password');

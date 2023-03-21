@@ -10,6 +10,7 @@ import { DeleteParrainModule } from './admin/parrain-marraine/delete-parrain/del
 import { ModuleMailerModule } from './modules/module-mailer.module';
 import { DeleteMenteeModule } from './admin/admin-protégé/delete-mentee/delete-mentee.module';
 import { MentorLoginModule } from './parrain/Login/mentor-login.module';
+import { MentorAccountModule } from './parrain/parrain-account/mentor-account.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { MentorLoginModule } from './parrain/Login/mentor-login.module';
     DeleteMenteeModule,
     ModuleMailerModule,
     MentorLoginModule,
+    MentorAccountModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://127.0.0.1/PartnerConnect'),
   ],
