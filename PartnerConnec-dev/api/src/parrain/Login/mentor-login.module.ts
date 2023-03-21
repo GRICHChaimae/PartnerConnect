@@ -3,14 +3,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
-import { UserSchema } from 'src/schemas/admin schemas/user.schema';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { JwtStrategy } from './jwt.strategy';
+import { ParrainSchema } from 'src/schemas/parrain schemas/parrain.schema';
+import { MentorJwtStrategy } from './mentor-jwt.strategy';
+import { MentorLoginService } from './mentor-login.service';
+import { MentorLoginController } from './mentor-login.controller';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'adminJwt' }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => {
@@ -23,10 +23,10 @@ import { JwtStrategy } from './jwt.strategy';
       },
       inject: [ConfigService],
     }),
-    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    MongooseModule.forFeature([{ name: 'Parrain', schema: ParrainSchema }]),
   ],
-  controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
-  exports: [JwtStrategy, PassportModule],
+  controllers: [MentorLoginController],
+  providers: [MentorLoginService, MentorJwtStrategy],
+  exports: [MentorJwtStrategy, PassportModule],
 })
-export class AuthModule {}
+export class MentorLoginModule {}
