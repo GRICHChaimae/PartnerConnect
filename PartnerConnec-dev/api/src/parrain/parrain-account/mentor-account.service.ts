@@ -13,10 +13,10 @@ export class MentorAccountService {
         private parrainAccount: mongoose.Model<Parrain>
     ) {}
 
-    async updateMentorPassword(id: string, updatePasswordDto: UpdatePasswordDto): Promise<string> {
+    async updateMentorPassword(mentor: Parrain, updatePasswordDto: UpdatePasswordDto): Promise<string> {
         const { password, newPassword, confirmNewPassword } = updatePasswordDto;
 
-        const parrain = await this.parrainAccount.findById({ _id: id });
+        const parrain = await this.parrainAccount.findById({ _id: mentor._id });
 
         const isPasswordMatched = await bcrypt.compare(password, parrain.password);
 
@@ -26,7 +26,7 @@ export class MentorAccountService {
 
         if (newPassword === confirmNewPassword) {
             const hashedPassword = await bcrypt.hash(newPassword, 10);
-            await this.parrainAccount.findByIdAndUpdate(id, { password: hashedPassword });
+            await this.parrainAccount.findByIdAndUpdate(mentor._id, { password: hashedPassword });
             return "password updated successfully"
         } else {
             throw new UnauthorizedException('New password does not match');

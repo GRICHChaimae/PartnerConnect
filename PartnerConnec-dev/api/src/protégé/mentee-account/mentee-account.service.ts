@@ -12,10 +12,10 @@ export class MenteeAccountService {
         private menteeAccount: mongoose.Model<Protégé>
     ) {}
 
-    async updateMentorPassword(id: string, updateMenteePasswordDto: UpdateMenteePasswordDto): Promise<string> {
+    async updateMentorPassword(protégé: Protégé, updateMenteePasswordDto: UpdateMenteePasswordDto): Promise<string> {
         const { password, newPassword, confirmNewPassword } = updateMenteePasswordDto;
 
-        const mentee = await this.menteeAccount.findOne({ _id: id });
+        const mentee = await this.menteeAccount.findOne({ _id: protégé._id });
 
         const isPasswordMatched = await bcrypt.compare(password, mentee.password);
 
@@ -25,7 +25,7 @@ export class MenteeAccountService {
 
         if (newPassword === confirmNewPassword) {
             const hashedPassword = await bcrypt.hash(newPassword, 10);
-            await this.menteeAccount.findByIdAndUpdate(id, { password: hashedPassword });
+            await this.menteeAccount.findByIdAndUpdate(protégé._id , { password: hashedPassword });
             return "password updated successfully"
         } else {
             throw new UnauthorizedException('New password does not match');

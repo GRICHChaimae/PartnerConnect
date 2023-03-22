@@ -16,6 +16,7 @@ export class Protégé {
   admin: User;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Parrain' })
   mentor: string;
+  _id: mongoose.Schema.Types.ObjectId
 }
 
 export const ProtégéSchema = SchemaFactory.createForClass(Protégé);

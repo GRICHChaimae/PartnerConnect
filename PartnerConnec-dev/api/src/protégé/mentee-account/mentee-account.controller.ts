@@ -1,4 +1,5 @@
-import { Body, Controller, Param, Put } from '@nestjs/common';
+import { Body, Controller, Param, Put, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { UpdateMenteePasswordDto } from './dto/updateMenteePassword.dto';
 import { MenteeAccountService } from './mentee-account.service';
 
@@ -6,13 +7,13 @@ import { MenteeAccountService } from './mentee-account.service';
 export class MenteeAccountController {
     constructor(private menteeAccountService: MenteeAccountService) {}
 
-    @Put(':id')
+    @Put()
+    @UseGuards(AuthGuard())
     async updateMenteePassword(
-        @Param('id')
-        id: string,
+        @Req() req, 
         @Body()
         updateMenteePasswordDto: UpdateMenteePasswordDto
     ): Promise<string> {
-        return this.menteeAccountService.updateMentorPassword(id, updateMenteePasswordDto)
+        return this.menteeAccountService.updateMentorPassword(req.user, updateMenteePasswordDto)
     }
 }

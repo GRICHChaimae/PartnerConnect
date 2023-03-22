@@ -1,4 +1,4 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Activity } from 'src/schemas/activities-calnder schemas/activities-calnder.schemas';
 import { ActivitiesService } from './activities.service';
@@ -7,12 +7,9 @@ import { ActivitiesService } from './activities.service';
 export class ActivitiesController {
     constructor(private activitiesService: ActivitiesService) {}
 
-    @Get(':id')
+    @Get()
     @UseGuards(AuthGuard())
-    async getActivities(
-        @Param('id')
-        id: string,
-    ): Promise<Activity[]> {
-        return this.activitiesService.findMenteeActivities(id)
+    async getActivities(@Req() req): Promise<Activity[]> {
+        return this.activitiesService.findMenteeActivities(req.user)
     }
 }
