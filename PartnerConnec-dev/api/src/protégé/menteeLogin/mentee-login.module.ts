@@ -15,7 +15,7 @@ import { MenteeLoginService } from './mentee-login.service';
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => {
         return {
-          secret: config.get<string>('JWT_SECRET'),
+          secret: config.get<string>('JWT_SECRET_Mentee'),
           signOptions: {
             expiresIn: config.get<string | number>('JWT_EXPIRE'),
           },

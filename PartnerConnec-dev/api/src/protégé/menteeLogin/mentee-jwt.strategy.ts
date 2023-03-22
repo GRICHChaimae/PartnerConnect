@@ -14,7 +14,7 @@ export class MenteeJwtStrategy extends PassportStrategy(Strategy, 'MenteeJWT') {
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.JWT_SECRET,
+      secretOrKey: process.env.JWT_SECRET_Mentee,
     });
   }
 
