@@ -17,6 +17,7 @@ import { GetActivitiesModule } from './parrain/getActivites/get-activities.modul
 import { MenteeLoginModule } from './protégé/menteeLogin/mentee-login.module';
 import { ActivitiesModule } from './protégé/get-activities/activities.module';
 import { MenteeAccountModule } from './protégé/mentee-account/mentee-account.module';
+import { GetMentorModule } from './protégé/get-mentor/get-mentor.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { MenteeAccountModule } from './protégé/mentee-account/mentee-account.m
     MenteeLoginModule,
     ActivitiesModule,
     MenteeAccountModule,
+    GetMentorModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://127.0.0.1/PartnerConnect'),
   ],
