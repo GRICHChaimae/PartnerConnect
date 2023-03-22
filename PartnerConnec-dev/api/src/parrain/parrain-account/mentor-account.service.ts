@@ -16,9 +16,11 @@ export class MentorAccountService {
     async updateMentorPassword(id: string, updatePasswordDto: UpdatePasswordDto): Promise<string> {
         const { password, newPassword, confirmNewPassword } = updatePasswordDto;
 
-        const parrain = await this.parrainAccount.findById({ id });
+        const parrain = await this.parrainAccount.findById({ _id: id });
 
-        if (password !== parrain.password) {
+        const isPasswordMatched = await bcrypt.compare(password, parrain.password);
+
+        if (!isPasswordMatched) {
             throw new UnauthorizedException('Old password does not match');
         }
 
