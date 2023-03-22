@@ -16,7 +16,7 @@ export class MentorAccountService {
     async updateMentorPassword(id: string, updatePasswordDto: UpdatePasswordDto): Promise<string> {
         const { password, newPassword, confirmNewPassword } = updatePasswordDto;
 
-        const parrain = await this.parrainAccount.findOne({ id });
+        const parrain = await this.parrainAccount.findById({ id });
 
         if (password !== parrain.password) {
             throw new UnauthorizedException('Old password does not match');
