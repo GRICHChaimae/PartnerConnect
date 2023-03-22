@@ -18,8 +18,6 @@ export class MentorLoginService {
         const { email, password } = mentorLoginDto;
     
         const mentor = await this.parrainModel.findOne({ email });
-
-        console.log(mentor)
     
         if (!mentor) {
           throw new UnauthorizedException('Invalid email or password');
@@ -33,5 +31,5 @@ export class MentorLoginService {
     
         const token = this.jwtService.sign({ id: mentor._id });
         return { token };
-      }
+    }
 }
