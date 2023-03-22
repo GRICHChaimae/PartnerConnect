@@ -14,6 +14,7 @@ export class Parrain {
   password: string;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   admin: User;
+  _id: mongoose.Types.ObjectId;
 }
 
 export const ParrainSchema = SchemaFactory.createForClass(Parrain);

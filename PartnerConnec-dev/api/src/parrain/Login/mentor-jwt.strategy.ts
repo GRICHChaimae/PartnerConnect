@@ -26,6 +26,6 @@ export class MentorJwtStrategy extends PassportStrategy(Strategy, 'MentorJWT') {
       throw new UnauthorizedException('Login first to access this endpoint.');
     }
 
-    return parrain;
+    return parrain
   }
 }

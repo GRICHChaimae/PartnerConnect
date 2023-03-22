@@ -11,6 +11,7 @@ import { ModuleMailerModule } from './modules/module-mailer.module';
 import { DeleteMenteeModule } from './admin/admin-protégé/delete-mentee/delete-mentee.module';
 import { MentorLoginModule } from './parrain/Login/mentor-login.module';
 import { MentorAccountModule } from './parrain/parrain-account/mentor-account.module';
+import { MentorMenteesModule } from './parrain/parrain-mentees/mentor-mentees.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { MentorAccountModule } from './parrain/parrain-account/mentor-account.mo
     ModuleMailerModule,
     MentorLoginModule,
     MentorAccountModule,
+    MentorMenteesModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://127.0.0.1/PartnerConnect'),
   ],
