@@ -11,6 +11,7 @@ import TableContainerC from '../../components/TableContainer';
 import AutocompleteComponent from '../../components/AutocompleteComponent';
 import AddButton from '../../components/AddButton';
 import FormModal from '../../components/FromModal';
+import UpdateMentor from '../../components/UpdateMentor';
 
 const columns = [
   { id: 'name', label: 'Name', align: 'left' },
@@ -22,8 +23,11 @@ const columns = [
 export default function Mentor() {
   const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openUpdate, setOpenUpdate] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleOpenUpdate = () => setOpenUpdate(true);
+  const handleCloseUpdate = () => setOpenUpdate(false);
 
   const token = localStorage.getItem('token');
 
@@ -66,6 +70,8 @@ export default function Mentor() {
     });
   }
 
+  const updateOneMentor = async (id) => {}
+
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <Paper sx={{ width: '100%', overflow: 'hidden', backgroundColor: 'aliceblue'}}>
@@ -90,7 +96,7 @@ export default function Mentor() {
           <FormModal open={open} FormForModal={<AddForm closeEvent={handleClose} getMentors={getMentors} />} />
         </Stack>
         <Box height={10} />
-        <TableContainerC columns={ columns } filterRows={filterRows} deleteOneMentor={deleteOneMentor}/>
+        <TableContainerC columns={ columns } filterRows={filterRows} deleteOne={deleteOneMentor} open={openUpdate} FormForModal={<UpdateMentor closeEvent={handleCloseUpdate} getMentors={getMentors} />} setOpenUpdate={setOpenUpdate}/>
       </Paper>
     </Box>
   );

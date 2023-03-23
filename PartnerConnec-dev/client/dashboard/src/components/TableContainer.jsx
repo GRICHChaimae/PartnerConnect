@@ -11,8 +11,9 @@ import IconButton from '@mui/material/IconButton';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import DeleteMentor from './DeleteModal';
+import FormModal from './FromModal';
 
-export default function TableContainerC({columns, filterRows, deleteOneMentor}) {
+export default function TableContainerC({columns, filterRows, deleteOne, open, FormForModal, setOpenUpdate}) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
@@ -51,13 +52,13 @@ export default function TableContainerC({columns, filterRows, deleteOneMentor}) 
                   {columns.map((column) => (
                     <TableCell key={row.id} align="left">
                         {column.id === 'delete' ? (
-                                <IconButton onClick={() => DeleteMentor(row._id, deleteOneMentor)}>
+                                <IconButton onClick={() => DeleteMentor(row._id, deleteOne)}>
                                     <PersonRemoveIcon />
                                 </IconButton>
                             ) : column.id === 'update' ? (
-                                <IconButton onClick={() => console.log("update")}>
-                                    <ManageAccountsIcon />
-                                </IconButton>
+                                <><IconButton onClick={() => setOpenUpdate(true)}>
+                            <ManageAccountsIcon />
+                          </IconButton></>
                             ) : row[column.id] }
                     </TableCell>
                   ))}
@@ -77,6 +78,7 @@ export default function TableContainerC({columns, filterRows, deleteOneMentor}) 
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
+        <FormModal open={open} FormForModal={FormForModal} />
         </>
       );
 }

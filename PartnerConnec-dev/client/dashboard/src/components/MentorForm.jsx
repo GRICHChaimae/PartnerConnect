@@ -6,9 +6,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Grid } from '@mui/material';
 import { Button } from '@mui/material';
 import Swal from 'sweetalert2'
+import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 
 export default function AddForm({ closeEvent, getMentors }) {
+  const [loading, setLoading] = useState(false)
   const [mentorData, setMentorData] = useState({
     name: '',
     email: '',
@@ -30,6 +32,7 @@ export default function AddForm({ closeEvent, getMentors }) {
   };
 
   const addMentor = () => {
+    setLoading(true)
     axios.post('http://localhost:3000/api/v1/p-auth/signup', {
       name: mentorData.name,
       email: mentorData.email,
@@ -39,6 +42,7 @@ export default function AddForm({ closeEvent, getMentors }) {
       console.log('Mentor account created successfully');
       closeEvent();
       getMentors()
+      setLoading(false)
       Swal.fire('Message!', 'Mentor account created successfully')
     })
     .catch(error => {
@@ -102,6 +106,9 @@ export default function AddForm({ closeEvent, getMentors }) {
           />
         </Grid>
         <Grid item xs={12}>
+          {
+            loading?
+            <CircularProgress sx={{marginLeft:'40%'}}/>:
           <Button
             fullWidth
             variant="contained"
@@ -111,6 +118,7 @@ export default function AddForm({ closeEvent, getMentors }) {
           >
             Add Mentor
           </Button>
+          }
         </Grid>
       </Grid>
       <Box sx={{ m: 4 }} />
