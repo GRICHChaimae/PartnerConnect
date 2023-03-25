@@ -1,32 +1,24 @@
 import * as React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import FirstScreen from './src/screens/mainScreens/FirstScreen';
-import PaUpdatePassword from './src/screens/parrain/PaUpdatePassword';
+import Home from './src/screens/Home';
+import MenteeLogin from './src/screens/mentee/MenteeLogin';
+import MentorLogin from './src/screens/mentor/MentorLogin';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MentorNav from './src/screens/MentorNav';
+import MenteeNav from './src/screens/MenteeNav';
 
-const Tab = createBottomTabNavigator();
-
-function MyTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen
-        options={{headerShown: false}}
-        name="FirstScreen"
-        component={FirstScreen}
-      />
-      <Tab.Screen
-        options={{headerShown: false}}
-        name="PaUpdatePassword"
-        component={PaUpdatePassword}
-      />
-    </Tab.Navigator>
-  );
-}
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <MyTabs />
+      <Stack.Navigator>
+        <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+        <Stack.Screen options={{ headerShown: false }} name="MenteeLogin" component={MenteeLogin} />
+        <Stack.Screen options={{ headerShown: false }} name="MentorLogin" component={MentorLogin} />
+        <Stack.Screen options={{ headerShown: false }} name="MentorNav" component={MentorNav} />
+        <Stack.Screen options={{ headerShown: false }} name="MenteeNav" component={MenteeNav} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
