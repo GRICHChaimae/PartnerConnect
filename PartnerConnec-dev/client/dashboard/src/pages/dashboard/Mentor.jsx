@@ -24,9 +24,9 @@ export default function Mentor() {
   const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
+  const [id,setId]= useState(null)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleOpenUpdate = () => setOpenUpdate(true);
   const handleCloseUpdate = () => setOpenUpdate(false);
 
   const token = localStorage.getItem('token');
@@ -70,7 +70,10 @@ export default function Mentor() {
     });
   }
 
-  const updateOneMentor = async (id) => {}
+  const updateOneMentor = async (id) => {
+    setOpenUpdate(true)
+    setId(id)
+  }
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -96,7 +99,7 @@ export default function Mentor() {
           <FormModal open={open} FormForModal={<AddForm closeEvent={handleClose} getMentors={getMentors} />} />
         </Stack>
         <Box height={10} />
-        <TableContainerC columns={ columns } filterRows={filterRows} deleteOne={deleteOneMentor} open={openUpdate} FormForModal={<UpdateMentor closeEvent={handleCloseUpdate} getMentors={getMentors} />} setOpenUpdate={setOpenUpdate}/>
+        <TableContainerC columns={ columns } filterRows={filterRows} deleteOne={deleteOneMentor} updateOne={updateOneMentor} open={openUpdate} FormForModal={<UpdateMentor id={id} closeEvent={handleCloseUpdate} getMentors={getMentors} />} />
       </Paper>
     </Box>
   );

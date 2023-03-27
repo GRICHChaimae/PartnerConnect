@@ -9,12 +9,10 @@ import Swal from 'sweetalert2'
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
 
-export default function AddForm({ closeEvent, getMentors }) {
+export default function AddForm({id, closeEvent, getMentors }) {
   const [loading, setLoading] = useState(false)
   const [mentorData, setMentorData] = useState({
     name: '',
-    email: '',
-    password: ''
   });
 
   const handleInputChange = (event) => {
@@ -31,31 +29,28 @@ export default function AddForm({ closeEvent, getMentors }) {
     headers: { Authorization: `Bearer ${token}` }
   };
 
-  const addMentor = () => {
+  const updateMentor = () => {
     setLoading(true)
-    axios.post('http://localhost:3000/api/v1/p-auth/signup', {
+    axios.put(`http://localhost:3000/api/v1/edit-mentor-info/${id}`, {
       name: mentorData.name,
-      email: mentorData.email,
-      password: mentorData.password
     }, config)
-    .then(res => {
-      console.log('Mentor account created successfully');
+    .then(() => {
+      console.log('Mentor info updated successfully');
       closeEvent();
       getMentors()
       setLoading(false)
-      Swal.fire('Message!', 'Mentor account created successfully')
+      Swal.fire('Message!', 'Mentor account updated successfully')
     })
     .catch(error => {
       console.error(error);
     });
-    // console.log(mentorData.name)
   } 
 
   return (
     <>
       <Box sx={{ m: 2 }} />
       <Typography variant="h5" align="center">
-        Add Mentor
+        Update Mentor name
       </Typography>
       <IconButton
         style={{ position: 'absolute', top: '0', right: '0' }}
@@ -65,7 +60,7 @@ export default function AddForm({ closeEvent, getMentors }) {
       </IconButton>
       <Box sx={{ m: 4 }} />
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <TextField
             fullWidth
             required
@@ -78,33 +73,6 @@ export default function AddForm({ closeEvent, getMentors }) {
             onChange={handleInputChange}
           />
         </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            fullWidth
-            required
-            id="email"
-            name="email"
-            label="Email"
-            variant="outlined"
-            placeholder="Enter Email"
-            value={mentorData.email}
-            onChange={handleInputChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            required
-            id="password"
-            name="password"
-            type="password"
-            label="Password"
-            variant="outlined"
-            placeholder="Enter Password"
-            value={mentorData.password}
-            onChange={handleInputChange}
-          />
-        </Grid>
         <Grid item xs={12}>
           {
             loading?
@@ -114,7 +82,7 @@ export default function AddForm({ closeEvent, getMentors }) {
             variant="contained"
             size="large"
             sx={{ mt: 2 }}
-            onClick={addMentor}
+            onClick={updateMentor}
           >
             Update Mentor
           </Button>

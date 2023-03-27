@@ -13,7 +13,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import DeleteMentor from './DeleteModal';
 import FormModal from './FromModal';
 
-export default function TableContainerC({columns, filterRows, deleteOne, open, FormForModal, setOpenUpdate}) {
+export default function TableContainerC({columns, filterRows, deleteOne, updateOne, open, FormForModal }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
   
@@ -26,59 +26,59 @@ export default function TableContainerC({columns, filterRows, deleteOne, open, F
       setPage(0);
     };
 
-    return (
-        <>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                    <TableCell
-                      key={column.id}
-                      align={column.align}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-            {filterRows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                <TableRow hover role="checkbox" tabIndex={-1}>
-                  {columns.map((column) => (
-                    <TableCell key={row.id} align="left">
-                        {column.id === 'delete' ? (
-                                <IconButton onClick={() => DeleteMentor(row._id, deleteOne)}>
-                                    <PersonRemoveIcon />
-                                </IconButton>
-                            ) : column.id === 'update' ? (
-                                <><IconButton onClick={() => setOpenUpdate(true)}>
-                            <ManageAccountsIcon />
-                          </IconButton></>
-                            ) : row[column.id] }
-                    </TableCell>
-                  ))}
-                </TableRow>
-                );
-              })}
-          </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={filterRows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Paper>
-        <FormModal open={open} FormForModal={FormForModal} />
-        </>
-      );
+  return (
+    <>
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+        {filterRows
+          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((row) => {
+            return (
+            <TableRow hover role="checkbox" tabIndex={-1}>
+              {columns.map((column) => (
+                <TableCell key={row.id} align="left">
+                    {column.id === 'delete' ? (
+                            <IconButton onClick={() => DeleteMentor(row._id, deleteOne)}>
+                                <PersonRemoveIcon />
+                            </IconButton>
+                        ) : column.id === 'update' ? (
+                            <><IconButton onClick={() => updateOne(row._id)}>
+                        <ManageAccountsIcon />
+                      </IconButton></>
+                        ) : row[column.id] }
+                </TableCell>
+              ))}
+            </TableRow>
+            );
+          })}
+      </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={filterRows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+    <FormModal open={open} FormForModal={FormForModal} />
+    </>
+  );
 }

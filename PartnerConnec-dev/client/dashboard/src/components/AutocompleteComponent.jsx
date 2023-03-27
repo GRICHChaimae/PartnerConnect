@@ -16,7 +16,7 @@ export default function AutocompleteComponent({rows, setSearchText}) {
     onChange={(e, v) => handleChange(v)}
     getOptionLabel={(row) => row.name ? row.name : ""}
     renderInput={(params) => (
-      <TextField {...params} size="small" label="Search Products"/>
+      <TextField {...params} size="small" label="Search By Name"/>
     )}
   />
   )
