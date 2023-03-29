@@ -59,13 +59,17 @@ export default function TableContainerC({columns, filterRows, deleteOne, updateO
                             <><IconButton onClick={() => updateOne(row._id)}>
                         <ManageAccountsIcon />
                       </IconButton></>
-                        ) : row[column.id] }
+                        ) : column.id.includes('.') ? (
+                          row[column.id.split('.')[0]][column.id.split('.')[1]]
+                        ) : (
+                          row[column.id] 
+                        )}
                 </TableCell>
               ))}
             </TableRow>
             );
           })}
-      </TableBody>
+          </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
