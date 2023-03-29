@@ -19,6 +19,7 @@ import { ActivitiesModule } from './protégé/get-activities/activities.module';
 import { MenteeAccountModule } from './protégé/mentee-account/mentee-account.module';
 import { GetMentorModule } from './protégé/get-mentor/get-mentor.module';
 import { EditMentorInfoModule } from './admin/parrain-marraine/edit-mentor-info/edit-mentor-info.module';
+import { EditMenteeInfoModule } from './admin/admin-protégé/edit-pr-info/edit-mentee-info.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { EditMentorInfoModule } from './admin/parrain-marraine/edit-mentor-info/
     MenteeAccountModule,
     GetMentorModule,
     EditMentorInfoModule,
+    EditMenteeInfoModule,
     ConfigModule.forRoot(),
     MongooseModule.forRoot('mongodb://127.0.0.1/PartnerConnect'),
   ],
