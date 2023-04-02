@@ -32,6 +32,18 @@ export default function AddForm({ closeEvent, getMentors }) {
   };
 
   const addMentor = () => {
+    if (!mentorData.name || !mentorData.email || !mentorData.password) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Please fill all fields',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+      });
+      return;
+    }
     setLoading(true)
     axios.post('http://localhost:3000/api/v1/p-auth/signup', {
       name: mentorData.name,

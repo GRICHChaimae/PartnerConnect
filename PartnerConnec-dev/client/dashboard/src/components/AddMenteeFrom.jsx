@@ -36,6 +36,18 @@ export default function AddMenteeFrom({ closeEvent, getMentees }) {
   };
 
   const addMentee = () => {
+    if (!mentorData.name || !mentorData.email || !mentorData.password || !selectedMentorId) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Please fill all fields',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+      });
+      return;
+    }
     setLoading(true)
     axios.post('http://localhost:3000/api/v1/pr-auth/signup', {
       name: mentorData.name,

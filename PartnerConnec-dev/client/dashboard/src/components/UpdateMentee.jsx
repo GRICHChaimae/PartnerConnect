@@ -35,6 +35,18 @@ export default function UpdateMenteeForm({id, closeEvent, getMentees }) {
   };
 
   const updateMentee = () => {
+    if (!mentorData.name || !selectedMentorId) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Please fill all fields',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+      });
+      return;
+    }
     setLoading(true)
     axios.put(`http://localhost:3000/api/v1/edit-mentee-info/${id}`, {
       name: mentorData.name,

@@ -30,6 +30,18 @@ export default function UpdateForm({id, closeEvent, getMentors }) {
   };
 
   const updateMentor = () => {
+    if (!mentorData.name) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Please fill all fields',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000
+      });
+      return;
+    }
     setLoading(true)
     axios.put(`http://localhost:3000/api/v1/edit-mentor-info/${id}`, {
       name: mentorData.name,
