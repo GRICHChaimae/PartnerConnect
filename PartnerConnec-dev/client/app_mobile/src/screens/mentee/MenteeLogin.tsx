@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import Input from '../../components/Input';
 import API_SERVER_IP from '../../config';
+import { useIsFocused } from '@react-navigation/native';
 
 const MenteeLogin = () => {
   const navigation: NavigationProp<ParamListBase> = useNavigation();
@@ -19,6 +20,15 @@ const MenteeLogin = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const isFocused = useIsFocused();
+  if (isFocused) {
+    AsyncStorage.getItem('token').then((token) => {
+      if (token) {
+        navigation.navigate('MenteeNav');
+      }
+    });
+  }
+  
   const MenteeLogin = async () => {
     await axios
       .post(`http://${API_SERVER_IP}:3000/api/v1/mentee-login`, {
@@ -31,6 +41,7 @@ const MenteeLogin = () => {
         setPassword('');
         AsyncStorage.setItem('token', response.data.token);
         navigation.navigate('MenteeNav');
+        setLoading(false)
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -54,6 +65,8 @@ const MenteeLogin = () => {
         }
       });
   };
+
+
 
   return (
     <View style={styles.container}>
