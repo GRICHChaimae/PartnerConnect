@@ -3,6 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeMentee from './mentee/HomeMentee';
 import MenteeActivities from './mentee/MenteeActivities';
 import MenteeAccount from './mentee/MenteeAccount';
+import MentorInfoAndChat from './mentee/MentorInfoAndChat';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +22,11 @@ const MenteeNav = () => {
         options={{headerShown: false, tabBarIcon: () => null}}
         name="Activities"
         component={MenteeActivities}
+      />
+      <Tab.Screen
+        options={{headerShown: false, tabBarIcon: () => null}}
+        name="Mentor"
+        component={MentorInfoAndChat}
       />
       <Tab.Screen
         options={{headerShown: false, tabBarIcon: () => null}}
