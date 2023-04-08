@@ -1,5 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
   View,
@@ -7,18 +5,58 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
-// import { Ionicons } from '@expo/vector-icons';
+import API_SERVER_IP from '../../config';
+import axios from 'axios';
 
 const UpdatePasswordForm = () => {
-  const [currentPassword, setCurrentPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
-  const handleUpdatePassword = () => {
-    // handle update password logic here
-    console.log('Updating password...');
+  const UpdateMenteePassword = async () => {
+    if (!password || !newPassword || !confirmNewPassword) {
+      Alert.alert(
+        'Error',
+        'Please fill all fields',
+        [{text: 'OK'}],
+        {cancelable: false},
+      );
+    }
+    const token = await AsyncStorage.getItem('token');
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    await axios
+    .put(`http://${API_SERVER_IP}:3000/api/v1/mentee-account`,{
+      password: password,
+      newPassword: newPassword,
+      confirmNewPassword: confirmNewPassword,
+    }, config)
+    .then(() => {
+      Alert.alert(
+        'Message',
+        'Mentee password updated successfully',
+        [{text: 'OK'}],
+        {cancelable: false},
+      );
+      setPassword('')
+      setNewPassword('')
+      setConfirmNewPassword('')
+    })
+    .catch(error => {
+      console.log(error.response)
+      Alert.alert(
+        'Error',
+        `${error.response.data.message}`,
+        [{text: 'OK'}],
+        {cancelable: false},
+      );
+    })
   };
 
   const navigation: NavigationProp<ParamListBase>  = useNavigation();
@@ -39,8 +77,8 @@ const UpdatePasswordForm = () => {
           style={styles.input}
           placeholder="Enter current password"
           placeholderTextColor="#777"
-          value={currentPassword}
-          onChangeText={setCurrentPassword}
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry
         />
       </View>
@@ -61,12 +99,12 @@ const UpdatePasswordForm = () => {
           style={styles.input}
           placeholder="Confirm new password"
           placeholderTextColor="#777"
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
+          value={confirmNewPassword}
+          onChangeText={setConfirmNewPassword}
           secureTextEntry
         />
       </View>
-      <TouchableOpacity style={styles.updateButton} onPress={handleUpdatePassword}>
+      <TouchableOpacity style={styles.updateButton} onPress={UpdateMenteePassword}>
         <Text style={styles.updateButtonText}>Update Password</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.logoutContainer} onPress={handleLogout}>
