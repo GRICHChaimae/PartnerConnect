@@ -45,29 +45,36 @@ export default function ListTransitaires() {
           value={searchText}
         />
       </View>
-      <FlatList
-  data={filterActivities}
-  renderItem={({ item }) => (
-    <TouchableOpacity style={styles.activity}>
-      <View style={styles.activityHeader}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.date}>{dayjs(item.date).format('DD/MM/YYYY')}</Text>
-      </View>
-      <View style={styles.activityBody}>
-        <Text style={styles.details}>
-          <Text style={styles.bold}>Activity Place: </Text>
-          {item.place}
-        </Text>
-        <Text style={styles.details}>
-          <Text style={styles.bold}>Activity Description: </Text>
-          {item.description}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  )}
-  keyExtractor={item => item._id.toString()}
-  contentContainerStyle={styles.activityList}
-/>
+      {
+        filterActivities.length != 0 ? (
+          <FlatList
+            data={filterActivities}
+            renderItem={({ item }) => (
+              <TouchableOpacity style={styles.activity}>
+                <View style={styles.activityHeader}>
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.date}>{dayjs(item.date).format('DD/MM/YYYY')}</Text>
+                </View>
+                <View style={styles.activityBody}>
+                  <Text style={styles.details}>
+                    <Text style={styles.bold}>Activity Place: </Text>
+                    {item.place}
+                  </Text>
+                  <Text style={styles.details}>
+                    <Text style={styles.bold}>Activity Description: </Text>
+                    {item.description}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            )}
+            keyExtractor={item => item._id.toString()}
+            contentContainerStyle={styles.activityList}
+          />
+        ) : (
+          <Text style={styles.noActivity}>OOPS !! No activities yet</Text>
+        )
+      }
+
     </View>
   )
 }
@@ -76,6 +83,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  noActivity: {
+    textAlign: 'center',
+    marginTop: 30,
   },
   activityHeader: {
     backgroundColor: '#3795BD',
