@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
@@ -61,54 +62,58 @@ const UpdatePasswordForm = () => {
 
   const navigation: NavigationProp<ParamListBase>  = useNavigation();
 
-  const handleLogout = async () => {
+  const Logout = async () => {
     AsyncStorage.removeItem('token').then(() => {
       console.log('Token removed');
     });
-      navigation.navigate('Home');
+      navigation.navigate('MainHome');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Update Password</Text>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Current Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter current password"
-          placeholderTextColor="#777"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
+      <View style={styles.header}>
+        <Text style={styles.title}>Your Mentor Info</Text>
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>New Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter new password"
-          placeholderTextColor="#777"
-          value={newPassword}
-          onChangeText={setNewPassword}
-          secureTextEntry
-        />
+      <View style={styles.allInputContainer}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Current Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter current password"
+            placeholderTextColor="#777"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>New Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter new password"
+            placeholderTextColor="#777"
+            value={newPassword}
+            onChangeText={setNewPassword}
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Confirm Password</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm new password"
+            placeholderTextColor="#777"
+            value={confirmNewPassword}
+            onChangeText={setConfirmNewPassword}
+            secureTextEntry
+          />
+        </View>
+        <TouchableOpacity style={styles.updateButton} onPress={UpdateMenteePassword}>
+          <Text style={styles.updateButtonText}>Update Password</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Confirm Password</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm new password"
-          placeholderTextColor="#777"
-          value={confirmNewPassword}
-          onChangeText={setConfirmNewPassword}
-          secureTextEntry
-        />
-      </View>
-      <TouchableOpacity style={styles.updateButton} onPress={UpdateMenteePassword}>
-        <Text style={styles.updateButtonText}>Update Password</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.logoutContainer} onPress={handleLogout}>
-        {/* <Ionicons name="log-out-outline" size={24} color="#777" /> */}
+      <TouchableOpacity style={styles.logoutContainer} onPress={Logout}>
+        <Image style={styles.icon} source={require('../../assets/images/log-out.png')} />
         <Text style={styles.logoutText}>Logout</Text>
       </TouchableOpacity>
     </View>
@@ -120,6 +125,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  icon: {
+    width: 35,
+    height: 25,
+    resizeMode: "contain",
+  },
+  header: {
+    height: 50,
+    backgroundColor: '#3795BD',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  allInputContainer: {
     paddingHorizontal: 20,
     paddingVertical: 40,
   },
@@ -163,8 +181,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontWeight: '500',
+    color: '#FFFFFF',
   },
 });
 
